@@ -2,6 +2,7 @@ import os
 from app_config import Config
 from create_app import create_app
 from flask_restful import Api
+import flask
 
 app = create_app(Config)
 api = Api(app)
@@ -11,7 +12,8 @@ api = Api(app)
 @app.route("/")
 def index():
     root_dir = os.path.dirname(os.getcwd())
-    return os.path.join(root_dir, "test_front", "build")
+    return flask.send_from_directory(os.path.join( "test-front", "build"), "index.html")
+    # return os.path.join("test-front", "build"), "index.html"
 
 
 from api.signup import SignUp
